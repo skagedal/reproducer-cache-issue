@@ -1,0 +1,35 @@
+
+plugins {
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    versions = [
+            vertx: '3.9.8'
+    ]
+}
+
+dependencies {
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.0'
+    implementation "com.github.akarnokd:rxjava3-bridge:3.0.0"
+    implementation "io.reactivex.rxjava3:rxjava:3.0.13"
+    implementation "io.vertx:vertx-web-client:${versions.vertx}"
+    implementation "io.vertx:vertx-rx-java2:${versions.vertx}"
+
+    testImplementation "io.vertx:vertx-junit5:${versions.vertx}"
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'tech.skagedal.issue.App'
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
