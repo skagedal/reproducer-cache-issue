@@ -14,7 +14,7 @@ ext {
 }
 
 dependencies {
-    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.0'
+    implementation 'com.github.ben-manes.caffeine:caffeine:3.0.3'
     implementation "com.github.akarnokd:rxjava3-bridge:3.0.0"
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
     implementation "io.vertx:vertx-web-client:${versions.vertx}"

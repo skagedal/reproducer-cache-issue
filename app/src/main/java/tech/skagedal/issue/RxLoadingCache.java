@@ -53,6 +53,6 @@ public class RxLoadingCache<Key extends @NonNull Object, Value extends @NonNull 
    * @return
    */
   public Single<Value> get(Key key) {
-    return Single.fromFuture(asyncLoadingCache.get(key));
+    return Single.fromCompletionStage(asyncLoadingCache.get(key));
   }
 }

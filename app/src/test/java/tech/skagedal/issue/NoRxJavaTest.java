@@ -3,8 +3,8 @@ package tech.skagedal.issue;
 import com.github.benmanes.caffeine.cache.AsyncLoadingCache;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import io.vertx.core.Vertx;
-import io.vertx.junit5.VertxExtension;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -68,13 +68,14 @@ public class NoRxJavaTest {
   void get_url_cached_from_within_context(Vertx vertx, VertxTestContext testContext) {
     vertx.runOnContext(context -> {
       final String status;
-      try {
-        status = cache.get("https://google.com").get();
-        System.out.println(status);
-      } catch (Throwable t) {
-        t.printStackTrace();
-      }
-      testContext.completeNow();
+      cache.get("https://google.com").whenComplete((str, t) -> {
+        if (t == null) {
+          System.out.println(str);
+          testContext.completeNow();
+        } else {
+          testContext.failNow(t);
+        }
+      });
     });
   }
 

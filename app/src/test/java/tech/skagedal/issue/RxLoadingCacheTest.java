@@ -44,7 +44,6 @@ class RxLoadingCacheTest {
 
   // This one is not ok - blocks thread!
   @Test
-  @Disabled
   void get_url_cached_from_within_context(Vertx vertx, VertxTestContext testContext) {
     getStatus("https://google.com").subscribe(status -> {
       System.out.println(status);
